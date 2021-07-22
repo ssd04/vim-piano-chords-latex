@@ -1,4 +1,9 @@
 
+if exists("g:loaded_piano_chords_latex")
+  finish
+endif
+let g:loaded_piano_chords_latex = 1
+
 " function! SetupPianoChords() range
 "     " '< and '> mark begin and end lines of most recent visually selected text.
 "     " Using those we get text from visual selection and iterate over the lines.

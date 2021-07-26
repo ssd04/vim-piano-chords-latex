@@ -20,34 +20,23 @@ Given tex (multiple lyrics text with chords):
   
   A     B       CJk
   I will trust in Him, no other.
-
+  
   A     B       CJk
   My soul is satisfied in Him alone.
 
-Execute (piano chords to latex):
-  function! s:get_visual_selection()
-    " Why is this not a built-in Vim script function?!
-    let [line_start, column_start] = getpos("'<")[1:2]
-    let [line_end, column_end] = getpos("'>")[1:2]
-    let lines = getline(line_start, line_end)
-    if len(lines) == 0
-        return ''
-    endif
-    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-    return join(lines, "\n")
-  endfunction
-  let l:block = s:get_visual_selection()
-  PianoChordsToLatex
+Do (piano chords to latex):
+  VG
+  :PianoChordsToLatex\<Enter>
 
 Expect tex (formatted latex code):
+              
   \[A]Greate\[B]st Trea\[CJk]sure,
   
-  
+              
   \[A]Wellsp\[B]ring of\[CJk] my soul
   
-  
+              
   \[A]I will\[B] trust \[CJk]in Him, no other.
-  
-  
+
+              
   \[A]My sou\[B]l is sa\[CJk]tisfied in Him alone.

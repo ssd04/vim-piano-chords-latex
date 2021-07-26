@@ -23,6 +23,9 @@ set cpo&vim
 "     endfor
 " endfunction
 
+" Default latex package
+let g:latex_chords_package = "songs"
+
 function! s:setup_piano_chords_buffer()
 endfunction
 
@@ -33,12 +36,22 @@ function! s:replace_chords(line)
     let l:num_words = len(split(l:line))
     let l:num_chars = len(split(l:line, '\zs'))
 
+    let l:start_op = "g_diWji"
+    let l:end_op = "\<esc>Pk"
+
+    if g:latex_chords_package == "songs"
+        let l:songs_package_op = "\\[]"
+    elseif g:latex_chords_package == "leadsheets"
+        let l:songs_package_op = "^{}"
+    endif
+
     " Check if chord line
     if l:num_spaces > l:num_chars/2
         let l:num_chords = l:num_words
 
         while l:num_chords > 0
-            execute "normal! g_diWji\\[]\<esc>Pk"
+            let l:cmd = printf("normal! %s%s%s", l:start_op, l:songs_package_op, l:end_op)
+            execute l:cmd
             let l:num_chords = l:num_chords - 1
         endwhile
 
@@ -72,6 +85,9 @@ function! s:setup_piano_chords()
     "         call deletebufline("%", i, i)
     "     endif
     " endfor
+endfunction
+
+function! s:initial_setup()
 endfunction
 
 command! -nargs=* -range -bang PianoChordsToLatex <line1>,<line2>call <SID>setup_piano_chords()

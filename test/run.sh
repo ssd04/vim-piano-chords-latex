@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 
+# set -x
+
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
+# Set a temp vim config where the plugin is
+# sourced directly, instead of using nvim plugin
+# standard path
 nvim -Nu <(cat << EOF
 filetype off
 set rtp+=~/.local/share/nvim/plugged/vader.vim
-set rtp+=~/.local/share/nvim/plugged/vim-piano-chords-latex
+source ${SCRIPTPATH}/../plugin/piano-chords-latex.vim
 filetype plugin indent on
 syntax enable
 EOF

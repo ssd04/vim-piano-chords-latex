@@ -1,42 +1,9 @@
 
-Given tex (one lyric text with chords):
-  A     B       CJk
-  Greatest Treasure,
+# Vader main file
 
-Execute (piano chords to latex):
-  PianoChordsToLatex
+# General
+Include (Basic tests): basic.vader
 
-Expect tex (formatted latex code):
-              
-  \[A]Greate\[B]st Trea\[CJk]sure,
-
-
-Given tex (multiple lyrics text with chords):
-  A     B       CJk
-  Greatest Treasure,
-  
-  A     B       CJk
-  Wellspring of my soul
-  
-  A     B       CJk
-  I will trust in Him, no other.
-  
-  A     B       CJk
-  My soul is satisfied in Him alone.
-
-Do (piano chords to latex):
-  VG
-  :PianoChordsToLatex\<Enter>
-
-Expect tex (formatted latex code):
-              
-  \[A]Greate\[B]st Trea\[CJk]sure,
-  
-              
-  \[A]Wellsp\[B]ring of\[CJk] my soul
-  
-              
-  \[A]I will\[B] trust \[CJk]in Him, no other.
-
-              
-  \[A]My sou\[B]l is sa\[CJk]tisfied in Him alone.
+# Chords based on latex package
+Include (Latex Songs package test): latex_songs_chords.vader
+Include (Latex Leadsheets package test): latex_leadsheets_chords.vader

@@ -16,6 +16,26 @@ Example using [vim-plug](https://github.com/junegunn/vim-plug):
 Plug 'ssd04/vim-piano-chords-latex'
 ```
 
+## Usage
+
+```vim
+:PianoChordsToLatex
+```
+
+## Testing
+
+Testing is performed using Vader package.
+
+### Prerequisite
+
+* [Vader.vim](https://github.com/junegunn/vader.vim)
+
+### Run
+
+```
+make test-newenv
+```
+
 ## License
 
 MIT

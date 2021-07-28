@@ -24,7 +24,8 @@ set cpo&vim
 " endfunction
 
 " Default latex package
-let g:latex_chords_package = "songs"
+let g:piano_chords_latex_package = "songs"
+let g:piano_chords_delete_empty_lines = 0
 
 function! s:setup_piano_chords_buffer()
 endfunction
@@ -36,12 +37,12 @@ function! s:replace_chords(line)
     let l:num_words = len(split(l:line))
     let l:num_chars = len(split(l:line, '\zs'))
 
-    let l:start_op = "g_diWji"
+    let l:start_op = "0g_diWji"
     let l:end_op = "\<esc>Pk"
 
-    if g:latex_chords_package == "songs"
+    if g:piano_chords_latex_package == "songs"
         let l:songs_package_op = "\\[]"
-    elseif g:latex_chords_package == "leadsheets"
+    elseif g:piano_chords_latex_package == "leadsheets"
         let l:songs_package_op = "^{}"
     endif
 
@@ -74,17 +75,23 @@ function! s:setup_piano_chords()
     let l:line = getline('.')
     let l:empty_line_index = s:replace_chords(l:line)
 
-    echo l:empty_line_index
-
-    " call add(l:empty_line_indices, l:empty_line_index)
-
     " " Delete empty line from the selection
-    " for i in l:empty_line_indices
-    "     if i != 0
-    "         echo "Do it ". i
-    "         call deletebufline("%", i, i)
-    "     endif
-    " endfor
+    " if g:piano_chords_delete_empty_lines == 1
+    "     " call deletebufline("%", l:empty_line_index)
+    "     execute "normal! dd"
+    " endif
+endfunction
+
+function! s:delete_lines_by_index(line_indices)
+    let l:line_indices = a:line_indices
+
+    " Delete empty line from the selection
+    for i in l:line_indices
+        if i != 0
+            echo "Do it ". i
+            call deletebufline("%", i, i)
+        endif
+    endfor
 endfunction
 
 function! s:initial_setup()

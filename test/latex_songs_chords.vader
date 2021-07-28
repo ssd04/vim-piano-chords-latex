@@ -9,7 +9,6 @@ Execute (piano chords to latex):
   PianoChordsToLatex
 
 Expect tex (formatted latex code):
-              
   \[A]Greate\[B]st Trea\[CJk]sure,
 
 
@@ -25,14 +24,12 @@ Do (piano chords to latex):
   :PianoChordsToLatex\<Enter>
 
 Expect tex (formatted latex code):
-              
   \[A]Greate\[B]st Trea\[CJk]sure,
   
-              
   \[A]Wellsp\[B]ring of\[CJk] my soul
 
 Execute (enable empty lines deletion):
-  let g:piano_chords_delete_empty_lines = 1
+  let g:piano_chords_delete_empty_lines = 0
 
 Given tex (partial lines):
   A     B       CJk
@@ -65,4 +62,4 @@ Expect tex (partial lines formatted latex code):
   My soul is satisfied in Him alone.
 
 Execute (disable empty lines deletion):
-  let g:piano_chords_delete_empty_lines = 0
+  let g:piano_chords_delete_empty_lines = 1

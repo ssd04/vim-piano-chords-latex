@@ -1,6 +1,5 @@
 Execute (set latex_chords_package to "songs"):
   let g:piano_chords_latex_package = "leadsheets"
-  let g:piano_chords_delete_empty_lines = 0
 
 Given tex (one lyric text with chords):
   A     B       CJk
@@ -10,7 +9,6 @@ Execute (piano chords to latex):
   PianoChordsToLatex
 
 Expect tex (formatted latex code):
-              
   ^{A}Greate^{B}st Trea^{CJk}sure,
 
 
@@ -26,8 +24,6 @@ Do (piano chords to latex):
   :PianoChordsToLatex\<Enter>
 
 Expect tex (formatted latex code):
-              
   ^{A}Greate^{B}st Trea^{CJk}sure,
   
-              
   ^{A}Wellsp^{B}ring of^{CJk} my soul

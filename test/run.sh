@@ -14,4 +14,4 @@ source ${SCRIPTPATH}/../plugin/piano-chords-latex.vim
 filetype plugin indent on
 syntax enable
 EOF
-) -c 'Vader! test/*' > /dev/null
+) -c 'Vader! test/test.vader' > /dev/null

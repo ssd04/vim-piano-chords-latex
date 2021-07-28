@@ -9,7 +9,7 @@ run-test:
 
 run-test-interactive:
 	@echo "Testing..."
-	nvim -c ':Vader' test/test.vader
+	nvim -c ':Vader test/test.vader'
 
 # Test in isolated env
 test-newenv:

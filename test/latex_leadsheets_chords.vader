@@ -1,5 +1,6 @@
 Execute (set latex_chords_package to "songs"):
-  let g:latex_chords_package = "leadsheets"
+  let g:piano_chords_latex_package = "leadsheets"
+  let g:piano_chords_delete_empty_lines = 0
 
 Given tex (one lyric text with chords):
   A     B       CJk
@@ -19,12 +20,6 @@ Given tex (multiple lyrics text with chords):
   
   A     B       CJk
   Wellspring of my soul
-  
-  A     B       CJk
-  I will trust in Him, no other.
-  
-  A     B       CJk
-  My soul is satisfied in Him alone.
 
 Do (piano chords to latex):
   VG
@@ -36,9 +31,3 @@ Expect tex (formatted latex code):
   
               
   ^{A}Wellsp^{B}ring of^{CJk} my soul
-  
-              
-  ^{A}I will^{B} trust ^{CJk}in Him, no other.
-
-              
-  ^{A}My sou^{B}l is sa^{CJk}tisfied in Him alone.

@@ -7,27 +7,15 @@ let g:loaded_piano_chords_latex = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-" function! SetupPianoChords() range
-"     " '< and '> mark begin and end lines of most recent visually selected text.
-"     " Using those we get text from visual selection and iterate over the lines.
-"     for l:line in getline(line("'<"), line("'>"))
-"         echo l:line
-"         let l:num_chars = len(split(l:line, '\zs'))
-"         echo split(l:line, '\zs')
-"         echo count(getline("."), " ")
-"         let l:num_words = len(split(l:line))
-"         echo l:num_words l:num_chars
-
-"         let l:chords = split(l:line)
-"         echo l:chords
-"     endfor
-" endfunction
-
-" Default latex package
+" Global variables defautls
 let g:piano_chords_latex_package = "songs"
 let g:piano_chords_delete_empty_lines = 1
 
-function! s:setup_piano_chords_buffer()
+function! s:initial_setup()
+    setlocal noautoindent
+    setlocal nocindent
+    setlocal nosmartindent
+    setlocal indentexpr=
 endfunction
 
 function! s:check_chords(line, line_index)
@@ -61,9 +49,7 @@ function! s:replace_chords(line, line_index)
         let l:songs_package_op = "^{}"
     endif
 
-    " Check if chord line
     let l:num_chords = len(split(l:line))
-
     while l:num_chords > 0
         let l:cmd = printf("%dnormal! %s%s%s", l:line_index, l:start_op, l:songs_package_op, l:end_op)
         execute l:cmd
@@ -71,25 +57,28 @@ function! s:replace_chords(line, line_index)
     endwhile
 endfunction
 
+function! s:delete_lines_by_index(line_indices)
+    let l:shift = 0
+    for i in a:line_indices
+        let l:cmd = printf("%dnormal! dd", i + l:shift)
+        execute l:cmd
+        let l:shift -= 1 
+    endfor
+endfunction
+
 function! s:setup_piano_chords() range
-    setlocal noautoindent
-    setlocal nocindent
-    setlocal nosmartindent
-    setlocal indentexpr=
+    call s:initial_setup()
 
     let l:chord_line_indices = []
 
     for line_number in range(a:firstline, a:lastline)
         let l:line = getline(line_number)
-        echo l:line
 
         let l:line_index = s:check_chords(l:line, line_number)
         if l:line_index != 0 
             call add(l:chord_line_indices, l:line_index)
         endif
     endfor
-
-    echo l:chord_line_indices
 
     for line_number in l:chord_line_indices
         let l:line = getline(line_number)
@@ -99,19 +88,6 @@ function! s:setup_piano_chords() range
     if g:piano_chords_delete_empty_lines == 1
         call s:delete_lines_by_index(l:chord_line_indices)
     endif
-endfunction
-
-function! s:delete_lines_by_index(line_indices)
-    let l:shift = 0
-    for i in a:line_indices
-        " call deletebufline("%", i, i)
-        let l:cmd = printf("%dnormal! dd", i + l:shift)
-        execute l:cmd
-        let l:shift -= 1 
-    endfor
-endfunction
-
-function! s:initial_setup()
 endfunction
 
 command! -nargs=* -range -bang PianoChordsToLatex <line1>,<line2>call <SID>setup_piano_chords()

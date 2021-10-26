@@ -36,6 +36,14 @@ Testing is performed using Vader package.
 make test-newenv
 ```
 
+## TODO
+
+* delete empty lines
+* global variables checks
+* autoload
+* filetype plugin setup
+* documentation + gif example
+
 ## License
 
 MIT
